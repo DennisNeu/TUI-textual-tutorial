@@ -1,10 +1,28 @@
 from textual.app import App, ComposeResult
-from textual.widgets import Footer, Header
+from textual.widgets import Button, Digits, Footer, Header
+from textual.containers import HorizontalGroup, VerticalScroll
+
+
+class TimeDisplay(Digits):
+    """A widget to display elapsed time."""
+    pass
+
+
+class Stopwatch(HorizontalGroup):
+    """A stopwatch widget."""
+
+    def compose(self) -> ComposeResult:
+        """Create child widgets for the stopwatch."""
+        yield Button("Start", id="start", variant="success")
+        yield Button("Stop", id="stop", variant="error")
+        yield Button("Reset", id="reset")
+        yield TimeDisplay("00:00:00:00")
 
 
 class StopwatchApp(App):
     """A textual stopwatch app."""
 
+    CSS_PATH = "stopwatch.tcss"
     BINDINGS = [
         ("d", "toggle_dark", "Toggle dark mode"),
         ("q", "quit", "Quit"),
@@ -14,6 +32,7 @@ class StopwatchApp(App):
         """Create child widgets for the app."""
         yield Header()
         yield Footer()
+        yield VerticalScroll(Stopwatch(), Stopwatch(), Stopwatch())
 
     def on_mount(self) -> None:
         self.title = "Stopwatch"
