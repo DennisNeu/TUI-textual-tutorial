@@ -7,6 +7,7 @@ class StopwatchApp(App):
 
     BINDINGS = [
         ("d", "toggle_dark", "Toggle dark mode"),
+        ("q", "quit", "Quit"),
         ]
 
     def compose(self) -> ComposeResult:
@@ -23,6 +24,11 @@ class StopwatchApp(App):
         self.theme = (
             "textual-dark" if self.theme == "textual-light" else "textual-light"
         )
+
+    def action_quit(self) -> None:
+        """An action to quit the app."""
+        self.exit()
+
 
 if __name__ == "__main__":
     app = StopwatchApp()
