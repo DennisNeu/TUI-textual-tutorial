@@ -23,7 +23,7 @@ class TimeDisplay(Digits):
         """Called when the time attribute changes."""
         minutes, seconds = divmod(time, 60)
         hours, minutes = divmod(minutes, 60)
-        self.update(f"{hours:02,.0f}:{minutes:02,.0f}:{seconds:05,.0f}")
+        self.update(f"{hours:02,.0f}:{minutes:02.0f}:{seconds:05.2f}")
 
 class Stopwatch(HorizontalGroup):
     """A stopwatch widget."""
@@ -40,7 +40,7 @@ class Stopwatch(HorizontalGroup):
         yield Button("Start", id="start", variant="success")
         yield Button("Stop", id="stop", variant="error")
         yield Button("Reset", id="reset")
-        yield TimeDisplay("00:00:00:00")
+        yield TimeDisplay()
 
 
 class StopwatchApp(App):
