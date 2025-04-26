@@ -30,7 +30,7 @@ class StopwatchApp(App):
 
     def compose(self) -> ComposeResult:
         """Create child widgets for the app."""
-        yield Header(icon="", show_clock=True)
+        yield Header(icon="A", show_clock=True)
         yield Footer()
         yield VerticalScroll(Stopwatch(), Stopwatch(), Stopwatch())
 
