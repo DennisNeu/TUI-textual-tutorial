@@ -88,7 +88,7 @@ class StopwatchApp(App):
         self.title = "Stopwatch"
         self.sub_title = "As per textual tutorial"
 
-    def action_addstopwatch(self) -> None:
+    def action_add_stopwatch(self) -> None:
         """An action to add a new stopwatch."""
         new_stopwatch = Stopwatch()
         self.query_one("#timers").mount(new_stopwatch)
