@@ -74,17 +74,31 @@ class StopwatchApp(App):
     BINDINGS = [
         ("d", "toggle_dark", "Toggle dark mode"),
         ("q", "quit", "Quit"),
+        ("a", "add_stopwatch", "Add stopwatch"),
+        ("r", "remove_stopwatch", "Remove stopwatch"),
         ]
 
     def compose(self) -> ComposeResult:
         """Create child widgets for the app."""
         yield Header(icon="", show_clock=True)
         yield Footer()
-        yield VerticalScroll(Stopwatch(), Stopwatch(), Stopwatch())
+        yield VerticalScroll(Stopwatch(), Stopwatch(), Stopwatch(), id="timers")
 
     def on_mount(self) -> None:
         self.title = "Stopwatch"
         self.sub_title = "As per textual tutorial"
+
+    def action_addstopwatch(self) -> None:
+        """An action to add a new stopwatch."""
+        new_stopwatch = Stopwatch()
+        self.query_one("#timers").mount(new_stopwatch)
+        new_stopwatch.scroll_visible()
+
+    def action_remove_stopwatch(self) -> None:
+        """An action to remove the last stopwatch."""
+        timers = self.query("Stopwatch")
+        if timers:
+            timers.last().remove()
 
     def action_toggle_dark(self) -> None:
         """An action to toggle dark mode."""
